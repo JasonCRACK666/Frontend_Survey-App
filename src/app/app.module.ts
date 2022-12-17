@@ -17,9 +17,19 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NavbarComponent } from './components/navbar/navbar.component'
+import { SignupComponent } from './pages/signup/signup.component'
+import { SigninComponent } from './pages/signin/signin.component'
+import { HomeComponent } from './pages/home/home.component'
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SignupComponent,
+    SigninComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
