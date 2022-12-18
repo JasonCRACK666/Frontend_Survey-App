@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
+import { HttpClientModule } from '@angular/common/http'
+
+import { FormsModule } from '@angular/forms'
+
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
@@ -22,6 +26,8 @@ import { SignupComponent } from './pages/signup/signup.component'
 import { SigninComponent } from './pages/signin/signin.component'
 import { HomeComponent } from './pages/home/home.component'
 
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +39,8 @@ import { HomeComponent } from './pages/home/home.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
@@ -47,7 +55,12 @@ import { HomeComponent } from './pages/home/home.component'
     MatRadioModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_SERVICE_CONFIG,
+      useValue: APP_CONFIG,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
