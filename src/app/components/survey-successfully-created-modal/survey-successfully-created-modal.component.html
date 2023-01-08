@@ -1,0 +1,26 @@
+<div mat-dialog-title>
+  <h2 class='text-center text-green-500'>Se ha creado correctamente la encuesta</h2>
+</div>
+<div mat-dialog-content>
+  <div class='flex flex-row justify-between items-center p-4 rounded bg-slate-200 gap-4'>
+    <p>{{ linkSurvey }}</p>
+    <button
+      mat-button
+      (click)="onCopyLink()"
+      class='bg-gray-400 text-slate-800'
+    >
+      Copiar
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Volver al inicio</button>
+  <button
+    mat-flat-button
+    (click)="onClose()"
+    routerLink="/survey/{{ data.surveyId }}/answer"
+    color="primary"
+  >
+    Resolver encuesta
+  </button>
+</div>

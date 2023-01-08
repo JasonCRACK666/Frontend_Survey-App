@@ -1,21 +1,62 @@
 <div class='h-screen w-full flex justify-center items-center'>
   <mat-card class='p-4 max-w-md w-full'>
-    <mat-card-title class='text-center text-4xl pb-2'>Sign In</mat-card-title>
-    <form (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill" class='w-full'>
+    <mat-card-title class='text-center text-4xl pb-2'>
+      Sign In
+    </mat-card-title>
+    <form class='mb-4' [formGroup]="userSignInForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class='w-full {{ haveError(email) && "mb-2" }}'>
         <mat-label>Correo electrónico</mat-label>
-        <input [(ngModel)]="userSignIn.email" matInput type='email' name="email">
+        <input
+          matInput
+          formControlName='email'
+          type='email'
+          name="email"
+        >
+        <mat-hint *ngIf="haveError(email)" class='text-red-600'>
+          <span *ngIf="email.errors?.['required']" >
+            Es requerido que ingrese su correo electrónico
+          </span>
+          <span *ngIf="email.errors?.['email']" >
+            El correo electrónico es invalido
+          </span>
+        </mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="fill" class='w-full'>
+      <mat-form-field appearance="fill" class='w-full {{ haveError(password) && "mb-2" }}'>
         <mat-label>Contraseña</mat-label>
-        <input [(ngModel)]="userSignIn.password" matInput type='password' name='password'>
+        <input
+          matInput
+          formControlName='password'
+          [type]="showPassword ? 'text' : 'password'"
+          name='password'
+        >
+        <mat-icon
+          class='cursor-pointer'
+          matSuffix
+          (click)='onToggleShowPassword()'
+        >
+          {{ showPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+        <mat-hint *ngIf="haveError(password)" class='text-red-600'>
+          <span *ngIf="password.errors?.['required']" >
+            Es requerido que ingrese su contraseña
+          </span>
+          <span *ngIf="password.errors?.['minlength']?.requiredLength" >
+            Debe tener mínimo {{ password.errors?.['minlength']?.requiredLength }} caracteres 
+          </span>
+        </mat-hint>
       </mat-form-field>
       <button
         class='w-full'
         color="primary"
         mat-raised-button
         type='submit'
+        [class.spinner]='loading'
+        [disabled]="loading"
       >Ingresar</button>
     </form>
+    <p class='text-lg'>
+      ¿No tiene una cuenta? Puede registrarse 
+      <a class='font-bold text-blue-500 underline underline-offset-2' routerLink="/signUp">Aquí</a>
+    </p>
   </mat-card>
 </div>

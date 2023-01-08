@@ -1,0 +1,33 @@
+<mat-card>
+  <a routerLink='/survey/{{ surveyItem.id }}'>
+    <mat-card-header class='cursor-pointer'>
+      <mat-card-title class='pb-1'>
+        {{ surveyItem.title }}
+      </mat-card-title>
+    </mat-card-header>
+  </a>
+  <img mat-card-image src="https://site.surveysparrow.com/wp-content/uploads/2021/07/9-Different-Types-of-Survey-Methods@2x-8.png">
+  <mat-card-content>
+    <p class='pt-4 text-[1rem]'>
+      {{ surveyItem.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button
+      mat-icon-button
+      matTooltip="Copiar link"
+      (click)="onCopyLinkSurvey()"
+    >
+      <mat-icon>file_copy</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item (click)="onDeleteSurvey()">
+        <mat-icon>delete_forever</mat-icon>
+        Eliminar
+      </button>
+    </mat-menu>
+  </mat-card-actions>
+</mat-card>

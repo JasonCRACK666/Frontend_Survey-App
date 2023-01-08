@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div class="flex justify-center items-center flex-col py-6 max-sm:px-4">
+  <form
+    class="max-w-xl w-full"
+    [formGroup]="surveyForm"
+    (ngSubmit)="onCreateSurvey()"
+  >
+    <mat-card class="p-4 mb-4">
+      <mat-form-field
+        appearance="outline"
+        class="text-2xl {{ haveError(title) && 'mb-2' }}"
+      >
+        <input
+          matInput
+          formControlName="title"
+          type="text"
+          name="title"
+          placeholder="Ingrese un titulo"
+        />
+        <mat-hint *ngIf="haveError(title)" class="text-red-600">
+          <span *ngIf="title.errors?.['required']">
+            Es requerido el titulo
+          </span>
+          <span *ngIf="title.errors?.['minlength']?.requiredLength">
+            Debe tener como mínimo
+            {{ title.errors?.['minlength']?.requiredLength }} caracteres
+          </span>
+        </mat-hint>
+      </mat-form-field>
+      <mat-form-field
+        class="resize-none {{ haveError(description) && 'mb-2' }}"
+      >
+        <textarea
+          matInput
+          formControlName="description"
+          type="text"
+          name="description"
+          rows="4"
+          placeholder="Ingrese una descripción"
+        ></textarea>
+        <mat-hint *ngIf="haveError(description)" class="text-red-600">
+          <span *ngIf="description.errors?.['required']">
+            Es requerido la descripción
+          </span>
+          <span *ngIf="description.errors?.['minlength']?.requiredLength">
+            Debe tener como mínimo
+            {{ description.errors?.['minlength']?.requiredLength }} caracteres
+          </span>
+        </mat-hint>
+      </mat-form-field>
+      <mat-card-actions align="end">
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [class.spinner]='loadingCreateSurvey'
+          [disabled]="questions.length === 0"
+        >
+          Crear encuesta
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div *ngIf="questions.length > 0">
+      <div
+        formArrayName="questions"
+        *ngFor="let questionForm of questions.controls; index as questionIndex"
+      >
+        <app-question-item
+          [questionForm]="questionForm"
+          [questions]="questions"
+          [questionIndex]="questionIndex"
+        ></app-question-item>
+      </div>
+    </div>
+    <div
+      class="mb-4 text-xl text-center uppercase font-bold"
+      *ngIf="questions.length === 0"
+    >
+      No hay ninguna pregunta
+    </div>
+    <div *ngIf="loadingOptions; else questionOptions">
+      <h1>Cargando</h1>
+    </div>
+    <ng-template #questionOptions>
+      <div class="flex justify-center mb-4 items-center gap-4">
+        <button
+          *ngFor="let questionType of questionTypes"
+          mat-flat-button
+          type="button"
+          [color]="questionType.name === 'text' ? 'primary' : 'warn'"
+          (click)="
+            questionType.name === 'text'
+              ? onAddQuestionText(questionType.id)
+              : onAddQuestionMulti(questionType.id)
+          "
+        >
+          Pregunta {{ questionType.name }}
+        </button>
+      </div>
+    </ng-template>
+  </form>
+</div>

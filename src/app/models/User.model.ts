@@ -20,3 +20,9 @@ export interface UserSignUp {
   email: string
   password: string
 }
+
+export interface UserDataInToken {
+  id: string
+  username: string
+  is_admin: string
+}

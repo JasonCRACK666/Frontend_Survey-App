@@ -1,1 +1,11 @@
 <app-navbar></app-navbar>
+<div class='container mx-auto px-20 max-sm:px-6 max-md:px-7 max-lg:px-10 my-4'>
+  <h2>Crear una encuesta</h2>
+  <div class='mb-5 grid max-md:grid-cols-2 max-lg:grid-cols-3 max-xl:grid-cols-4 grid-cols-5 gap-2'>
+    <a routerLink="/survey/create" class='rounded h-32 flex justify-center items-center border-2 border-blue-500 cursor-pointer hover:border-blue-700'>
+      <mat-icon class='text-blue-700'>exposure_plus_1</mat-icon>
+    </a>
+  </div>
+  <mat-divider class='border-black'></mat-divider>
+  <app-survey-list></app-survey-list>
+</div>

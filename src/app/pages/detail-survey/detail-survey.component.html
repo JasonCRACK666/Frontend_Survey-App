@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<main class='flex justify-center items-center flex-col max-sm:px-4 pb-8'>
+  <ng-template #loadingSurveyData>
+    <mat-progress-spinner
+      class='animate-spin'
+      diameter="50"
+      value="65"
+    ></mat-progress-spinner>
+  </ng-template>
+  <div *ngIf="!loadingData; else loadingSurveyData" class='max-w-3xl w-full'>
+    <mat-tab-group>
+      <mat-tab label="Encuesta">
+        <app-tab-survey-detail [surveyDetail]="surveyData"></app-tab-survey-detail>
+      </mat-tab>
+      <mat-tab label="Respuestas ({{ surveyData.completeds }})">
+        <app-tab-survey-answers [surveyAnswers]="surveyData"></app-tab-survey-answers>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</main>

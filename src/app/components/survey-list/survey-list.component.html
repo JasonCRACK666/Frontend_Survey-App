@@ -1,0 +1,19 @@
+<div class='flex justify-center mt-4' *ngIf="loading$ | async; else SurveysList">
+  <mat-progress-spinner
+    class='animate-spin'
+    diameter="60"
+    value="65"
+  ></mat-progress-spinner>
+</div>
+<ng-template #SurveysList>
+  <div *ngIf="surveys$ | async; let surveys">
+    <div *ngIf="surveys.length > 0; else NoSurveys" class='mt-4 grid grid-cols-4 max-sm:grid-cols-1 max-md:grid-cols-2 max-xl:grid-cols-3 gap-4'>
+      <app-survey-item *ngFor="let survey of surveys" [surveyItem]="survey"></app-survey-item>
+    </div>
+    <ng-template #NoSurveys>
+      <p class='pt-4 text-center text-xl text-blue-600'>
+        No tiene ninguna encuesta
+      </p>
+    </ng-template>
+  </div>
+</ng-template>
