@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
 
 import { UserSignUp } from 'src/app/models/User.model'
@@ -15,15 +16,31 @@ export class SignupComponent implements OnInit {
   showPassword = false
   userSignUpForm: FormGroup = new FormGroup({})
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.userSignUpForm = new FormGroup({
-      first_name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      last_name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(5)])
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
     })
   }
 
@@ -48,13 +65,28 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('Hello')
     if (this.userSignUpForm.valid) {
       this.loading = true
-      this.userService.onSignUp(this.userSignUpForm.value as UserSignUp).subscribe(({ message }) => {
-        console.log(message)
-        this.loading = false
-        this.router.navigate(['/', 'signIn'])
-      })
+      this.userService
+        .onSignUp(this.userSignUpForm.value as UserSignUp)
+        .subscribe({
+          next: ({ message }) => {
+            console.log(message)
+            this.router.navigate(['/', 'signIn'])
+          },
+          error: err => {
+            console.log(err)
+            this._snackBar.open(err, '', {
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+              duration: 5000,
+            })
+          },
+          complete: () => {
+            this.loading = false
+          },
+        })
     }
   }
 

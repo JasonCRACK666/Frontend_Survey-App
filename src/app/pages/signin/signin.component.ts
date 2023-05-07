@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { UserSignIn } from 'src/app/models/User.model'
 
@@ -15,12 +16,19 @@ export class SigninComponent implements OnInit {
   showPassword = false
   userSignInForm: FormGroup = new FormGroup({})
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.userSignInForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     })
   }
 
@@ -35,11 +43,24 @@ export class SigninComponent implements OnInit {
   onSubmit(): void {
     if (this.userSignInForm.valid) {
       this.loading = true
-      this.userService.onSignIn(this.userSignInForm.value as UserSignIn).subscribe(({ token }) => {
-        this.userService.loginUser(token)
-        this.loading = false
-        this.router.navigate(['/', 'home'])
-      })
+      this.userService
+        .onSignIn(this.userSignInForm.value as UserSignIn)
+        .subscribe({
+          next: ({ token }) => {
+            this.userService.loginUser(token)
+            this.loading = false
+            this.router.navigate(['/', 'home'])
+          },
+          error: ({ error: { error } }) => {
+            console.log(error)
+            this._snackBar.open(error, '', {
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+              duration: 5000,
+            })
+            this.loading = false
+          },
+        })
     }
   }
 

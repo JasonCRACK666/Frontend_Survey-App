@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store'
 
 import { UserService } from 'src/app/services/user.service'
 import { logOut } from 'src/app/state/actions/auth.actions'
+import { setSurveys } from 'src/app/state/actions/survey.actions'
 import { selectUser } from 'src/app/state/selectors/auth.selectors'
 
 @Component({
@@ -15,13 +16,14 @@ export class NavbarComponent {
     private userServices: UserService,
     private router: Router,
     private store: Store
-  ) { }
+  ) {}
 
   user$ = this.store.select(selectUser)
 
   onLogOut(): void {
     this.userServices.logOut()
     this.store.dispatch(logOut())
+    this.store.dispatch(setSurveys({ surveys: [] }))
     this.router.navigate(['/', 'signIn'])
   }
 }

@@ -6,12 +6,12 @@ import { AuthState } from '../models/auth.state'
 
 export const initialState: AuthState = {
   token: localStorage.getItem('token'),
-  user: null
+  user: null,
 }
 
 export const authReducers = createReducer(
   initialState,
   on(setUser, (state, { user }) => ({ ...state, user })),
   on(login, (state, { token }) => ({ ...state, token })),
-  on(logOut, state => ({ ...state, token: null, user: null }))
+  on(logOut, () => ({ token: null, user: null }))
 )
