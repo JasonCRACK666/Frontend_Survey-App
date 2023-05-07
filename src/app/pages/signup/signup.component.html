@@ -3,7 +3,7 @@
     <mat-card-title class='text-center text-4xl pb-4'>
       Sign Up
     </mat-card-title>
-    <form class='mb-4' [formGroup]="userSignUpForm" (onSubmit)='onSubmit()'>
+    <form class='mb-4' [formGroup]="userSignUpForm" (ngSubmit)='onSubmit()'>
       <mat-form-field appearance="fill" class='w-full {{ haveError(firstName) && "pb-2" }}'>
         <mat-label>Nombre</mat-label>
         <input
