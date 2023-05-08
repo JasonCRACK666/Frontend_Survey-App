@@ -3,11 +3,15 @@ import { Injectable, Inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 
-import { catchError, map, Observable } from 'rxjs'
+import { catchError, map, Observable, of } from 'rxjs'
 
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface'
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service'
-import { UserDataInToken, UserSignIn, UserSignUp } from 'src/app/models/User.model'
+import {
+  UserDataInToken,
+  UserSignIn,
+  UserSignUp,
+} from 'src/app/models/User.model'
 import { login, setUser } from '../state/actions/auth.actions'
 
 @Injectable({
@@ -19,7 +23,7 @@ export class UserService {
     private http: HttpClient,
     private router: Router,
     private store: Store
-  ) { }
+  ) {}
 
   onSignIn(
     credentials: UserSignIn
@@ -39,30 +43,35 @@ export class UserService {
     )
   }
 
-  getUserWithToken(): Observable<{ status: number, user: UserDataInToken }> {
-    return this.http.get<{ status: number, user: UserDataInToken }>('/api/auth/users/me', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-          ? `Bearer ${localStorage.getItem('token')}`
-          : ''
+  getUserWithToken(): Observable<{ status: number; user: UserDataInToken }> {
+    return this.http.get<{ status: number; user: UserDataInToken }>(
+      '/api/auth/users/me',
+      {
+        headers: {
+          Authorization: localStorage.getItem('token')
+            ? `Bearer ${localStorage.getItem('token')}`
+            : '',
+        },
       }
-    })
+    )
   }
 
   isLoggedIn(token: string): Observable<boolean> {
-    return this.http.post<{ status: number }>('/api/auth/verify', { token }).pipe(
-      map(() => {
-        this.store.dispatch(login({ token }))
-        this.getUserWithToken().subscribe(({ user }) => {
-          this.store.dispatch(setUser({ user }))
+    return this.http
+      .post<{ status: number }>('/api/auth/verify', { token })
+      .pipe(
+        map(() => {
+          this.store.dispatch(login({ token }))
+          this.getUserWithToken().subscribe(({ user }) => {
+            this.store.dispatch(setUser({ user }))
+          })
+          return true
+        }),
+        catchError(() => {
+          this.router.navigate(['signIn'])
+          return of(false)
         })
-        return true
-      }),
-      catchError((_err, status) => {
-        this.router.navigate(['signIn'])
-        return status
-      })
-    )
+      )
   }
 
   loginUser(token: string): void {
