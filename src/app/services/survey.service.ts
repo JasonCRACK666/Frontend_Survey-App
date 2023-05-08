@@ -24,16 +24,17 @@ export class SurveyService {
     private http: HttpClient
   ) {}
 
-  private getAccessToken: string | '' = localStorage.getItem('token')
-    ? `Bearer ${localStorage.getItem('token')}`
-    : ''
+  private getAccessToken = (): string | '' =>
+    localStorage.getItem('token')
+      ? `Bearer ${localStorage.getItem('token')}`
+      : ''
 
   getAllSurveys(): Observable<{ status: number; surveys: SurveyEntity[] }> {
     return this.http.get<{ status: number; surveys: SurveyEntity[] }>(
       this.SURVEY_PATH,
       {
         headers: {
-          Authorization: this.getAccessToken,
+          Authorization: this.getAccessToken(),
         },
       }
     )
@@ -59,7 +60,7 @@ export class SurveyService {
       isCompleted: boolean
     }>(`${this.SURVEY_PATH}/${surveyId}/isComplete`, {
       headers: {
-        Authorization: this.getAccessToken,
+        Authorization: this.getAccessToken(),
       },
     })
   }
@@ -73,7 +74,7 @@ export class SurveyService {
       surveyId: string
     }>(this.SURVEY_PATH, createSurvey, {
       headers: {
-        Authorization: this.getAccessToken,
+        Authorization: this.getAccessToken(),
       },
     })
   }
@@ -85,7 +86,7 @@ export class SurveyService {
       `${this.SURVEY_PATH}/${surveyId}`,
       {
         headers: {
-          Authorization: this.getAccessToken,
+          Authorization: this.getAccessToken(),
         },
       }
     )
