@@ -1,27 +1,30 @@
-# AppSurvey
+# APP SURVEY (APP)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+Una App para poder crear encuestas personalizadas, poder responderlas y ver las respuestas hechas por los usuarios
 
-## Development server
+## Requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Node.js](https://nodejs.org/es)
+- [Angular CLI](https://angular.io/cli)
 
-## Code scaffolding
+## Pasos para correr la APP
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Ingrese al proyecto y abra una terminal (Powershell si esta en windows)
 
-## Build
+2. Ingrese el siguiente comando en la terminal que haya abierto, para poder instalar las dependencias del proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm install
+```
 
-## Running unit tests
+3. Luego de que las dependencias se hayan instalado, deberá ingresar el siguiente comando para poder ejecutar el proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+npm run start
+```
 
-## Running end-to-end tests
+4. Si no ha ocurrido ningún error en la ejecución, deberá de ingresar al puerto en donde se este ejecutando la App, comúnmente sera este puerto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+|
+| [http://localhost:4200](http://localhost:4200)
+|
