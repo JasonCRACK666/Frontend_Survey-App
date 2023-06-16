@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core'
 
-import { QuestionWithAnswers } from 'src/app/models/Question.model';
+import { QuestionWithAnswers } from 'src/app/models/Question.model'
 
 @Component({
   selector: 'app-question-detail',
-  templateUrl: './question-detail.component.html'
+  templateUrl: './question-detail.component.html',
 })
 export class QuestionDetailComponent {
   @Input() question!: QuestionWithAnswers

@@ -11,6 +11,4 @@ export const login = createAction(
   props<{ token: string }>()
 )
 
-export const logOut = createAction(
-  'Remove token and user'
-)
+export const logOut = createAction('Remove token and user')

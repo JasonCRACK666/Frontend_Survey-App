@@ -1,6 +1,6 @@
-import { SurveyEntity } from 'src/app/models/Survey.model';
+import { SurveyEntity } from 'src/app/models/Survey.model'
 
 export interface SurveyState {
-  loading: boolean,
+  loading: boolean
   surveys: SurveyEntity[]
 }

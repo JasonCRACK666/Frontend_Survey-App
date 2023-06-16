@@ -1,25 +1,27 @@
-<div [formGroup]="optionForm" class='flex flex-row gap-2'>
-  <mat-form-field appearance="outline" class='w-3/4 {{ haveError(value) && "mb-2" }}'>
+<div [formGroup]="optionForm" class="flex flex-row gap-2">
+  <mat-form-field
+    appearance="outline"
+    class="w-3/4 {{ haveError(value) && 'mb-2' }}"
+  >
     <input
       matInput
-      formControlName='value'
+      formControlName="value"
       type="text"
-      name='value'
-      placeholder='Nombre de la opción'
-    >
-    <mat-hint *ngIf="haveError(value)" class='text-red-500'>
-      <span *ngIf="value.errors?.['required']">
-        La opción es requerida
-      </span>
+      name="value"
+      placeholder="Nombre de la opción"
+    />
+    <mat-hint *ngIf="haveError(value)" class="text-red-500">
+      <span *ngIf="value.errors?.['required']"> La opción es requerida </span>
       <span *ngIf="value.errors?.['minlength']?.requiredLength">
-        Debe tener mínimo {{ value.errors?.['minlength']?.requiredLength }} caracteres
+        Debe tener mínimo
+        {{ value.errors?.['minlength']?.requiredLength }} caracteres
       </span>
     </mat-hint>
   </mat-form-field>
   <button
     mat-icon-button
     color="warn"
-    type='button'
+    type="button"
     [disabled]="options.length < 2"
     (click)="onRemoveOption()"
   >

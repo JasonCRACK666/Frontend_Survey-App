@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core'
+import { FormArray, FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-option-item',
-  templateUrl: './option-item.component.html'
+  templateUrl: './option-item.component.html',
 })
 export class OptionItemComponent {
   @Input() options: FormArray = new FormArray<any>([])

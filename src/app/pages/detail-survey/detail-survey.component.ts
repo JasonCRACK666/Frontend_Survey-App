@@ -27,9 +27,8 @@ export class DetailSurveyComponent implements OnInit {
       .surveyDataAnswers(surveyId)
       .pipe(
         map(({ survey }) => survey),
-        catchError(error => {
+        catchError(() => {
           this.router.navigate(['/', 'home'])
-          console.log(error)
           this.loadingData = false
           return of()
         })

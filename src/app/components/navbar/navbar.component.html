@@ -1,10 +1,12 @@
-<mat-toolbar class='justify-between' color="primary">
+<mat-toolbar class="justify-between" color="primary">
   <a routerLink="/home">AppSurvey</a>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu='matMenu'>
-    <div *ngIf="user$ | async; let user" class='text-lg p-3'>{{ user.username }}</div>
+  <mat-menu #menu="matMenu">
+    <div *ngIf="user$ | async; let user" class="text-lg p-3">
+      {{ user.username }}
+    </div>
     <mat-divider></mat-divider>
     <button mat-menu-item>
       <mat-icon>person</mat-icon>

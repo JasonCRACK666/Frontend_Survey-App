@@ -1,21 +1,21 @@
 <app-navbar></app-navbar>
-<div class='flex justify-center items-center flex-col max-sm:px-4 py-8'>
+<div class="flex justify-center items-center flex-col max-sm:px-4 py-8">
   <ng-template #loadingAnswerSurvey>
     <mat-progress-spinner
-      class='animate-spin'
+      class="animate-spin"
       diameter="50"
       value="65"
     ></mat-progress-spinner>
   </ng-template>
-  <div *ngIf="!loadingSurvey; else loadingAnswerSurvey" class='max-w-xl w-full'>
-    <mat-card class='p-2 mb-4'>
-      <mat-card-header class='mb-1'>
-        <img mat-card-avatar [src]="survey.avatar" [alt]="survey.username">
-        <mat-card-title class='text-3xl'>{{ survey.title }}</mat-card-title>
+  <div *ngIf="!loadingSurvey; else loadingAnswerSurvey" class="max-w-xl w-full">
+    <mat-card class="p-2 mb-4">
+      <mat-card-header class="mb-1">
+        <img mat-card-avatar [src]="survey.avatar" [alt]="survey.username" />
+        <mat-card-title class="text-3xl">{{ survey.title }}</mat-card-title>
         <mat-card-subtitle>{{ survey.username }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p class='text-lg'>
+        <p class="text-lg">
           {{ survey.description }}
         </p>
       </mat-card-content>
@@ -24,26 +24,21 @@
   <form
     [formGroup]="responseSurvey"
     (ngSubmit)="onSendAnswersSurvey()"
-    class='w-full max-w-xl'
+    class="w-full max-w-xl"
   >
     <div
-      class='flex flex-col justify-center items-center gap-4 mb-4'
-      formArrayName='answers'
+      class="flex flex-col justify-center items-center gap-4 mb-4"
+      formArrayName="answers"
     >
       <app-question-answer-item
         *ngFor="let question of questions; index as answerIndex"
         [answerIndex]="answerIndex"
         [answers]="answers"
         [question]="question"
-        class='w-full'
+        class="w-full"
       ></app-question-answer-item>
     </div>
-    <button
-      mat-raised-button
-      color='accent'
-      type='submit'
-      class='w-full'
-    >
+    <button mat-raised-button color="accent" type="submit" class="w-full">
       Enviar respuesta
     </button>
   </form>

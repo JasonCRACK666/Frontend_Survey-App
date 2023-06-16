@@ -1,9 +1,12 @@
-<mat-card [formGroup]='answer' class='px-2'>
-  <mat-card-header class='mb-2'>
+<mat-card [formGroup]="answer" class="px-2">
+  <mat-card-header class="mb-2">
     <mat-card-title>{{ question.question }}</mat-card-title>
   </mat-card-header>
   <mat-card-content *ngIf="question.options; else answerText">
-    <mat-radio-group formControlName='response' class='flex flex-col items-start'>
+    <mat-radio-group
+      formControlName="response"
+      class="flex flex-col items-start"
+    >
       <mat-radio-button
         *ngFor="let option of question.options"
         [value]="option.id"
@@ -14,19 +17,20 @@
   </mat-card-content>
   <ng-template #answerText>
     <mat-card-content>
-      <mat-form-field appearance="fill" class='w-full'>
+      <mat-form-field appearance="fill" class="w-full">
         <textarea
-          formControlName='response'
-          rows='2'
+          formControlName="response"
+          rows="2"
           placeholder="Escribe tu respuesta"
           matInput
         ></textarea>
-        <mat-hint *ngIf="haveError(response)" class='text-red-500'>
+        <mat-hint *ngIf="haveError(response)" class="text-red-500">
           <span *ngIf="response.errors?.['required']">
             La respuesta es requerido
           </span>
           <span *ngIf="response.errors?.['minlength']?.requiredLength">
-            Debe tener mínimo {{ response.errors?.['minlength']?.requiredLength }} caracteres
+            Debe tener mínimo
+            {{ response.errors?.['minlength']?.requiredLength }} caracteres
           </span>
         </mat-hint>
       </mat-form-field>

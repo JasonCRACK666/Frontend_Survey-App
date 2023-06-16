@@ -53,7 +53,7 @@
           mat-raised-button
           type="submit"
           color="primary"
-          [class.spinner]='loadingCreateSurvey'
+          [class.spinner]="loadingCreateSurvey"
           [disabled]="questions.length === 0"
         >
           Crear encuesta

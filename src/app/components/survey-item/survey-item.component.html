@@ -1,14 +1,17 @@
 <mat-card>
-  <a routerLink='/survey/{{ surveyItem.id }}'>
-    <mat-card-header class='cursor-pointer'>
-      <mat-card-title class='pb-1'>
+  <a routerLink="/survey/{{ surveyItem.id }}">
+    <mat-card-header class="cursor-pointer">
+      <mat-card-title class="pb-1">
         {{ surveyItem.title }}
       </mat-card-title>
     </mat-card-header>
   </a>
-  <img mat-card-image src="https://site.surveysparrow.com/wp-content/uploads/2021/07/9-Different-Types-of-Survey-Methods@2x-8.png">
+  <img
+    mat-card-image
+    src="https://site.surveysparrow.com/wp-content/uploads/2021/07/9-Different-Types-of-Survey-Methods@2x-8.png"
+  />
   <mat-card-content>
-    <p class='pt-4 text-[1rem]'>
+    <p class="pt-4 text-[1rem]">
       {{ surveyItem.description }}
     </p>
   </mat-card-content>

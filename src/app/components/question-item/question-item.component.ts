@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core'
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-question-item',
-  templateUrl: './question-item.component.html'
+  templateUrl: './question-item.component.html',
 })
 export class QuestionItemComponent {
   @Input() questions!: FormArray
@@ -29,7 +29,10 @@ export class QuestionItemComponent {
   onAddNewOption(): void {
     if (this.options) {
       const newOption = new FormGroup({
-        value: new FormControl('', [Validators.required, Validators.minLength(3)])
+        value: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
       })
       this.options.push(newOption)
     }

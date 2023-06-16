@@ -65,18 +65,15 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Hello')
     if (this.userSignUpForm.valid) {
       this.loading = true
       this.userService
         .onSignUp(this.userSignUpForm.value as UserSignUp)
         .subscribe({
-          next: ({ message }) => {
-            console.log(message)
+          next: () => {
             this.router.navigate(['/', 'signIn'])
           },
           error: err => {
-            console.log(err)
             this._snackBar.open(err, '', {
               horizontalPosition: 'center',
               verticalPosition: 'bottom',

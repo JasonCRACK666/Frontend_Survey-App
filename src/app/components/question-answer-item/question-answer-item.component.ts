@@ -4,7 +4,7 @@ import { SendQuestionDetail } from 'src/app/models/Question.model'
 
 @Component({
   selector: 'app-question-answer-item',
-  templateUrl: './question-answer-item.component.html'
+  templateUrl: './question-answer-item.component.html',
 })
 export class QuestionAnswerItemComponent {
   @Input() answerIndex = 0

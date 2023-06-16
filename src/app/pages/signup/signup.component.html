@@ -1,100 +1,114 @@
-<div class='h-screen w-full flex justify-center items-center'>
-  <mat-card class='p-4 max-w-md w-full'>
-    <mat-card-title class='text-center text-4xl pb-4'>
-      Sign Up
-    </mat-card-title>
-    <form class='mb-4' [formGroup]="userSignUpForm" (ngSubmit)='onSubmit()'>
-      <mat-form-field appearance="fill" class='w-full {{ haveError(firstName) && "pb-2" }}'>
+<div class="h-screen w-full flex justify-center items-center">
+  <mat-card class="p-4 max-w-md w-full">
+    <mat-card-title class="text-center text-4xl pb-4"> Sign Up </mat-card-title>
+    <form class="mb-4" [formGroup]="userSignUpForm" (ngSubmit)="onSubmit()">
+      <mat-form-field
+        appearance="fill"
+        class="w-full {{ haveError(firstName) && 'pb-2' }}"
+      >
         <mat-label>Nombre</mat-label>
-        <input
-          matInput
-          formControlName='first_name'
-          name='first_name'
-        >
-        <mat-hint *ngIf="haveError(firstName)" class='text-red-600'>
-          <span *ngIf="firstName.errors?.['required']" >
+        <input matInput formControlName="first_name" name="first_name" />
+        <mat-hint *ngIf="haveError(firstName)" class="text-red-600">
+          <span *ngIf="firstName.errors?.['required']">
             Es requerido que ingrese su nombre
           </span>
-          <span *ngIf="firstName.errors?.['minlength']?.requiredLength" >
-            Debe tener mínimo {{ firstName.errors?.['minlength']?.requiredLength }} caracteres 
+          <span *ngIf="firstName.errors?.['minlength']?.requiredLength">
+            Debe tener mínimo
+            {{ firstName.errors?.['minlength']?.requiredLength }} caracteres
           </span>
         </mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="fill" class='w-full {{ haveError(lastName) && "pb-2" }}'>
+      <mat-form-field
+        appearance="fill"
+        class="w-full {{ haveError(lastName) && 'pb-2' }}"
+      >
         <mat-label>Apellidos</mat-label>
-        <input
-          matInput
-          formControlName='last_name'
-          name='last_name'
-        >
-        <mat-hint *ngIf="haveError(lastName)" class='text-red-600'>
-          <span *ngIf="lastName.errors?.['required']" >
+        <input matInput formControlName="last_name" name="last_name" />
+        <mat-hint *ngIf="haveError(lastName)" class="text-red-600">
+          <span *ngIf="lastName.errors?.['required']">
             Es requerido que ingrese sus apellidos
           </span>
-          <span *ngIf="lastName.errors?.['minlength']?.requiredLength" >
-            Debe tener mínimo {{ lastName.errors?.['minlength']?.requiredLength }} caracteres 
+          <span *ngIf="lastName.errors?.['minlength']?.requiredLength">
+            Debe tener mínimo
+            {{ lastName.errors?.['minlength']?.requiredLength }} caracteres
           </span>
         </mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="fill" class='w-full {{ haveError(username) && "pb-2" }}'>
+      <mat-form-field
+        appearance="fill"
+        class="w-full {{ haveError(username) && 'pb-2' }}"
+      >
         <mat-label>Nombre de usuario</mat-label>
-        <input
-          matInput
-          formControlName='username'
-          name="username"
-        >
-        <mat-hint *ngIf="haveError(username)" class='text-red-600'>
-          <span *ngIf="username.errors?.['required']" >
+        <input matInput formControlName="username" name="username" />
+        <mat-hint *ngIf="haveError(username)" class="text-red-600">
+          <span *ngIf="username.errors?.['required']">
             Es requerido que ingrese su nombre de usuario
           </span>
-          <span *ngIf="username.errors?.['minlength']?.requiredLength" >
-            Debe tener mínimo {{ username.errors?.['minlength']?.requiredLength }} caracteres 
+          <span *ngIf="username.errors?.['minlength']?.requiredLength">
+            Debe tener mínimo
+            {{ username.errors?.['minlength']?.requiredLength }} caracteres
           </span>
         </mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="fill" class='w-full {{ haveError(email) && "pb-2" }}'>
+      <mat-form-field
+        appearance="fill"
+        class="w-full {{ haveError(email) && 'pb-2' }}"
+      >
         <mat-label>Correo electrónico</mat-label>
-        <input
-          matInput
-          formControlName='email'
-          type='email'
-          name="email"
-        >
-        <mat-hint *ngIf="haveError(email)" class='text-red-600'>
-          <span *ngIf="email.errors?.['required']" >
+        <input matInput formControlName="email" type="email" name="email" />
+        <mat-hint *ngIf="haveError(email)" class="text-red-600">
+          <span *ngIf="email.errors?.['required']">
             Es requerido que ingrese un correo electrónico
           </span>
-          <span *ngIf="email.errors?.['email']" >
+          <span *ngIf="email.errors?.['email']">
             El correo electrónico es invalido
           </span>
         </mat-hint>
       </mat-form-field>
-      <mat-form-field appearance="fill" class='w-full {{ haveError(password) && "pb-2" }}'>
+      <mat-form-field
+        appearance="fill"
+        class="w-full {{ haveError(password) && 'pb-2' }}"
+      >
         <mat-label>Contraseña</mat-label>
         <input
           matInput
-          formControlName='password'
+          formControlName="password"
           [type]="showPassword ? 'text' : 'password'"
-          name='password'
+          name="password"
+        />
+        <mat-icon
+          class="cursor-pointer"
+          matSuffix
+          (click)="onToggleShowPassword()"
+          >remove_red_eye</mat-icon
         >
-        <mat-icon class='cursor-pointer' matSuffix (click)='onToggleShowPassword()'>remove_red_eye</mat-icon>
-        <mat-hint *ngIf="haveError(password)" class='text-red-600'>
-          <span *ngIf="password.errors?.['required']" >
+        <mat-hint *ngIf="haveError(password)" class="text-red-600">
+          <span *ngIf="password.errors?.['required']">
             Es requerido que ingrese una contraseña
           </span>
-          <span *ngIf="password.errors?.['minlength']?.requiredLength" >
-            Debe tener mínimo {{ password.errors?.['minlength']?.requiredLength }} caracteres 
+          <span *ngIf="password.errors?.['minlength']?.requiredLength">
+            Debe tener mínimo
+            {{ password.errors?.['minlength']?.requiredLength }} caracteres
           </span>
         </mat-hint>
       </mat-form-field>
       <button
-        class='w-full'
+        class="w-full"
         color="accent"
         mat-raised-button
-        type='submit'
+        type="submit"
         [disabled]="loading"
-      >Registrarse</button>
+      >
+        Registrarse
+      </button>
     </form>
-    <p class='text-lg'>¿Ya estas registrado? Puedes ingresar <a class='font-bold text-pink-500 underline underline-offset-2' routerLink="/signIn">Aquí</a></p>
+    <p class="text-lg">
+      ¿Ya estas registrado? Puedes ingresar
+      <a
+        class="font-bold text-pink-500 underline underline-offset-2"
+        routerLink="/signIn"
+        >Aquí</a
+      >
+    </p>
   </mat-card>
 </div>

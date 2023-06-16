@@ -34,7 +34,7 @@ const routes: Routes = [
   {
     path: 'survey/completed',
     component: CompleteSurveyComponent,
-    canActivate: [IsAuthGuard]
+    canActivate: [IsAuthGuard],
   },
   {
     path: 'survey/:surveyId',
@@ -44,7 +44,7 @@ const routes: Routes = [
   {
     path: 'survey/:surveyId/answer',
     component: AnswerSurveyComponent,
-    canActivate: [IsAuthGuard, CompletedSurveyGuard]
+    canActivate: [IsAuthGuard, CompletedSurveyGuard],
   },
   {
     path: '',
@@ -57,4 +57,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

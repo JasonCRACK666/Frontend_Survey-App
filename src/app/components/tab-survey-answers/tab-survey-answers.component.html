@@ -1,29 +1,39 @@
-<div class='m-4'>
+<div class="m-4">
   <div *ngIf="surveyAnswers.completeds === 0; else QuestionAnswers">
-    <h2 class='text-center'>No hay respuestas</h2>
+    <h2 class="text-center">No hay respuestas</h2>
   </div>
   <ng-template #QuestionAnswers>
-  <div *ngFor="let question of surveyAnswers.questions">
-    <div class='mb-4'>
-      <mat-accordion *ngIf="question.question_type === 'text'; else QuestionMultiGraphic">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title class='text-2xl'>{{ question.question }}</mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-list *ngFor="let response of question.responses">
-            <mat-list-item>
-              <img matListItemAvatar [src]="response.avatar" [alt]="response.username">
-              <h4 matListItemTitle>{{ response.username }}</h4>
-              <p matListItemLine>{{ response.response }}</p>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div *ngFor="let question of surveyAnswers.questions">
+      <div class="mb-4">
+        <mat-accordion
+          *ngIf="question.question_type === 'text'; else QuestionMultiGraphic"
+        >
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="text-2xl">{{
+                question.question
+              }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list *ngFor="let response of question.responses">
+              <mat-list-item>
+                <img
+                  matListItemAvatar
+                  [src]="response.avatar"
+                  [alt]="response.username"
+                />
+                <h4 matListItemTitle>{{ response.username }}</h4>
+                <p matListItemLine>{{ response.response }}</p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <ng-template #QuestionMultiGraphic>
+        <app-question-detail-graphic
+          [question]="question"
+        ></app-question-detail-graphic>
+      </ng-template>
     </div>
-    <ng-template #QuestionMultiGraphic>
-      <app-question-detail-graphic [question]="question"></app-question-detail-graphic>
-    </ng-template>
-  </div>
   </ng-template>
 </div>

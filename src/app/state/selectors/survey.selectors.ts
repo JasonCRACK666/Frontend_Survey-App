@@ -4,7 +4,8 @@ import { AppState } from '../app.state'
 
 import { SurveyState } from '../models/survey.state'
 
-export const selectSurveys = createFeatureSelector<AppState['surveys']>('surveys')
+export const selectSurveys =
+  createFeatureSelector<AppState['surveys']>('surveys')
 
 export const selectLoading = createSelector(
   selectSurveys,

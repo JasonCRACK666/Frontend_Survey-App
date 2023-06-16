@@ -40,7 +40,8 @@ export interface QuestionTypeEntity {
   name: string
 }
 
-export interface SendQuestionDetail extends Omit<QuestionEntity, 'survey_id' | 'question_type_id' | 'options'> {
+export interface SendQuestionDetail
+  extends Omit<QuestionEntity, 'survey_id' | 'question_type_id' | 'options'> {
   question_type: string
   options?: OptionEntity[]
 }

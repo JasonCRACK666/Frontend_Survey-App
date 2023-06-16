@@ -1,24 +1,25 @@
-<mat-card [formGroup]='questionForm' class='p-4 mb-4'>
-  <div class='flex gap-2'>
-    <mat-form-field class='w-full {{ haveError(question) && "mb-2" }}'>
+<mat-card [formGroup]="questionForm" class="p-4 mb-4">
+  <div class="flex gap-2">
+    <mat-form-field class="w-full {{ haveError(question) && 'mb-2' }}">
       <input
         matInput
-        formControlName='question'
+        formControlName="question"
         type="text"
         placeholder="Ingrese la pregunta"
-      >
-      <mat-hint *ngIf="haveError(question)" class='text-red-500'>
+      />
+      <mat-hint *ngIf="haveError(question)" class="text-red-500">
         <span *ngIf="question.errors?.['required']">
           La pregunta es requerido
         </span>
         <span *ngIf="question.errors?.['minlength']?.requiredLength">
-          Debe tener mínimo {{ question.errors?.['minlength']?.requiredLength }} caracteres
+          Debe tener mínimo
+          {{ question.errors?.['minlength']?.requiredLength }} caracteres
         </span>
       </mat-hint>
     </mat-form-field>
     <button
       mat-icon-button
-      type='button'
+      type="button"
       matTooltip="Eliminar pregunta"
       color="warn"
       (click)="onRemoveQuestion()"
@@ -27,9 +28,12 @@
     </button>
   </div>
   <div *ngIf="options">
-    <div *ngFor="let optionForm of options.controls; index as optionIndex" formArrayName='options'>
+    <div
+      *ngFor="let optionForm of options.controls; index as optionIndex"
+      formArrayName="options"
+    >
       <app-option-item
-        [optionForm]='optionForm'
+        [optionForm]="optionForm"
         [options]="options"
         [optionIndex]="optionIndex"
       ></app-option-item>
@@ -37,7 +41,7 @@
     <button
       mat-flat-button
       color="primary"
-      type='button'
+      type="button"
       (click)="onAddNewOption()"
     >
       Añadir opción

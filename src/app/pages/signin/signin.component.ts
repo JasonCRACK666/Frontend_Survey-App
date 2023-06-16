@@ -52,7 +52,6 @@ export class SigninComponent implements OnInit {
             this.router.navigate(['/', 'home'])
           },
           error: ({ error: { error } }) => {
-            console.log(error)
             this._snackBar.open(error, '', {
               horizontalPosition: 'center',
               verticalPosition: 'bottom',
